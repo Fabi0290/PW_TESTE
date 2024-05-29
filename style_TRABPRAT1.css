@@ -1,0 +1,231 @@
+h1{
+    text-align: left;
+    
+}
+img{
+    float: center;
+    margin: 0 auto;
+    border-radius: 10px;
+    
+}
+
+
+.button1{
+    text-align: right;
+    float: right;
+    padding: 10px 20px;
+    font-size: 12px;
+    background-color: white; 
+    color: black; 
+    border: black;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.button2{
+    text-align: center;
+    float: center;
+    padding: 10px 20px;
+    font-size: 12px;
+    background-color: #888; 
+    color: black; 
+    border: black;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+}
+.button3{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-align: left;
+    float: left;
+    padding: 10px 20px;
+    font-size: 12px;
+    background-color: white; 
+    color: black; 
+    border: black;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.button4 {
+    display: block; /* Certifica-se de que cada botão ocupa toda a largura do container */
+    width: 100%; /* Ocupa toda a largura do container */
+    height: 60px; /* Define a altura do botão */
+    margin-bottom: 20px; /* Margem inferior para espaçamento entre os botões */
+    margin-left: 180px;
+    background-color: #888; 
+    color: black; 
+    border: black;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.button5 {
+    margin-bottom: 20px; /* Margem inferior para espaçamento entre os botões */
+    background-color:cornflowerblue; 
+    color: white; 
+    border: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+nav {
+    background-color:#737373;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    height: 100px; 
+}
+.img-container {
+    height: 300px; 
+    background-color: white; 
+}
+.card {
+    height: 350px; 
+}
+.modal {
+    display: none; /* Oculta o modal por padrão */
+    position: fixed; /* Permanece fixo na tela, mesmo quando rolar */
+    z-index: 1; /* Define a ordem de empilhamento do modal */
+    left: 0;
+    top: 0;
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    background-color: rgba(0,0,0,0.4); /* Fundo semi-transparente */
+    overflow: auto; /* Permite rolar o conteúdo do modal, se necessário */
+}
+
+/* Conteúdo do modal */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* Centraliza verticalmente */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%; /* Largura do conteúdo do modal */
+    border-radius: 10px;
+}
+.close {
+    text-align: right;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.center{
+    text-align: center;
+    float: center;
+}
+
+.imagemCarros {
+    float: left; /* Alinha a imagem à esquerda */
+    width: 50%; /* Define a largura como metade da largura da página */
+    max-width: 50%; /* Garante que a imagem não ultrapasse metade da largura da página */
+    margin-right: 20px; /* Espaçamento à direita para separar da outra parte do conteúdo */
+}
+
+.zona {
+    background-color:#737373;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    height: 100px; 
+}
+
+/* Estilos para a imagem central */
+.imagem-central {
+    position: absolute;
+    top: 45px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Estilos para os botões */
+
+
+.frase {
+    font-size: 36px; 
+    margin-left: 150px;
+}
+
+.botoes {
+    position: absolute;
+    width: 200px; /* Define a largura do container */
+    margin-top: 20px; /* Margem superior para os botões */
+}
+
+
+
+.meu-modal {
+    display: none; /* Oculta o modal por padrão */
+    position: fixed; /* Permanece fixo na tela, mesmo quando rolar */
+    z-index: 1; /* Define a ordem de empilhamento do modal */
+    top: 250px;
+    right: 100px;
+    width: 50%; /* Largura total */
+    height: 50%; /* Altura total */
+    background-color: rgba(0,0,0,0.4); /* Fundo semi-transparente */
+    overflow: auto; /* Permite rolar o conteúdo do modal, se necessário */
+}
+
+.meu-modal-content {
+    position: absolute;
+    top: 0%; /* Posiciona o conteúdo no centro vertical */
+    left: 4%; /* Posiciona o conteúdo no centro horizontal */
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.logo {
+    position: absolute;
+    bottom: 30%; /* Posiciona a imagem no canto inferior */
+    left: 7%; /* Posiciona a imagem no canto esquerdo */
+    width: 350px; /* Largura da imagem */
+    height: 250px;
+}
+
+.dados {
+    font-size: 24px; 
+    margin-left: 600px;
+    margin-top: 100px;
+}
+
+input {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+.dados {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.dados label {
+    margin-bottom: 5px;
+    width: 100px; /* ajuste este valor conforme necessário */
+}
+
+.dados input {
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 100%; /* para preencher a largura disponível */
+    height: 50%;
+    font-size: 14px;
+}
+.responsive-img {
+    max-width: 100%;
+    height: auto;
+}
+
+#carroDetalhes {
+    height: 111%; /* Defina a altura desejada aqui */
+}
