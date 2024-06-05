@@ -1,0 +1,26 @@
+{
+  "name": "pw_teste",
+  "version": "1.0.0",
+  "description": "Tentativa trab2 server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fabi0290/PW_TESTE.git"
+  },
+  "author": "Fábio Rocha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fabi0290/PW_TESTE/issues"
+  },
+  "homepage": "https://github.com/Fabi0290/PW_TESTE#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.2"
+  }
+}
