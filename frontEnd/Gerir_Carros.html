@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Carros</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="style_Gerir.css">
+  <nav>
+    <img src="Photos/LOGO_STAND.png" alt="IMG1" height="100px" width="20%">
+    <div class="zona">
+        <!-- Botão no canto superior esquerdo -->
+        <button class="button3" onclick="goBack()">Back</button>
+    </div>
+</nav>
+</head>
+<body>
+  <div class="container mt-5">
+    <h2>Lista de Carros</h2>
+    <div class="d-flex justify-content-end mb-3">
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">+ Novo</button>
+    </div>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Marca</th>
+          <th>Modelo</th>
+          <th>Foto</th>
+          <th>Quilometragem</th>
+          <th>Preço</th>
+          <th>Fotos</th>
+        </tr>
+      </thead>
+      <tbody id="carrosTabela">
+        <!-- Linhas serão adicionadas dinamicamente aqui -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal para Adicionar Carro -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel">Adicionar Carro</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="mId" class="form-label">ID</label>
+          <input type="text" class="form-control" id="mId" name="id" />
+        </div>
+        <div class="mb-3">
+          <label for="mMarca" class="form-label">Marca</label>
+          <input type="text" class="form-control" id="mMarca" name="Marca" />
+        </div>
+        <div class="mb-3">
+          <label for="mModelo" class="form-label">Modelo</label>
+          <input type="text" class="form-control" id="mModelo" name="Modelo" />
+        </div>
+        <div class="mb-3">
+          <label for="mCombustivel" class="form-label">Combustível</label>
+          <input type="text" class="form-control" id="mCombustivel" name="Combustivel" />
+        </div>
+        <div class="mb-3">
+          <label for="mQuilometragem" class="form-label">Quilometragem</label>
+          <input type="text" class="form-control" id="mQuilometragem" name="Quilometragem" />
+        </div>
+        <div class="mb-3">
+          <label for="mPreco" class="form-label">Preço</label>
+          <input type="text" class="form-control" id="mPreco" name="Preco" />
+        </div>
+        <div class="mb-3">
+          <label for="mFoto" class="form-label">Link da Foto</label>
+          <input type="text" class="form-control" id="mFoto" name="Foto" />
+        </div>
+        <button type="button" class="btn btn-primary" onclick="novoCarro()">Enviar</button>
+        <button type="reset" class="btn btn-success">Limpar</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Modal para Editar Carro -->
+  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">Editar Carro</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="mIdEdit" class="form-label">ID</label>
+            <input type="text" class="form-control" id="mIdEdit" name="id" readonly />
+          </div>
+          <div class="mb-3">
+            <label for="mMarcaEdit" class="form-label">Marca</label>
+            <input type="text" class="form-control" id="mMarcaEdit" name="Marca" />
+          </div>
+          <div class="mb-3">
+            <label for="mDetalhesEdit" class="form-label">Detalhes</label>
+            <input type="text" class="form-control" id="mDetalhesEdit" name="Detalhes" />
+          </div>
+          <div class="mb-3">
+            <label for="mFotoEdit" class="form-label">Link da Foto</label>
+            <input type="text" class="form-control" id="mFotoEdit" name="Foto" />
+          </div>
+          <button type="button" class="btn btn-primary" onclick="salvarEdicaoCarro()">Salvar Alterações</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    fetch('http://localhost:4242/api/carros')
+        .then(response => response.json())
+        .then(data => {
+          const tabela = document.getElementById('carrosTabela');
+          data.forEach(carro => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td>${carro.id}</td>
+              <td>${carro.marca}</td>
+              <td>${carro.modelo}</td>
+              <td>${carro.combustivel}</td>
+              <td>${carro.quilometragem}</td>
+              <td>${carro.preco}</td>
+              <td><a href="${carro.imagem}" target="_blank">Link da Foto</a></td>
+              <td>
+                <button class="btn btn-success btn-sm" onclick="abrirEditarCarro(${carro.id})">Editar</button>
+                <button class="btn btn-danger btn-sm" onclick="apagarCarro(${carro.id})">Apagar</button>
+              </td>
+            `;
+            tabela.appendChild(tr);
+          });
+        })
+      .catch(error => console.error('Erro ao carregar carros:', error));
+
+  function novoCarro() {
+  const id = document.getElementById('mId').value;
+  const marca = document.getElementById('mMarca').value;
+  const modelo = document.getElementById('mModelo').value;
+  const combustivel = document.getElementById('mCombustivel').value;
+  const quilometragem = document.getElementById('mQuilometragem').value;
+  const preco = document.getElementById('mPreco').value;
+  const foto = document.getElementById('mFoto').value;
+
+  const novoCarro = {
+    id,
+    marca,
+    modelo,
+    combustivel,
+    quilometragem,
+    preco,
+    imagem: foto
+  };
+
+  fetch('http://localhost:4242/api/carros/create', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(novoCarro)
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    var addModal = new bootstrap.Modal(document.getElementById('addModal'));
+    addModal.hide();
+    location.reload();
+  })
+  .catch(error => console.error('Erro ao adicionar carro:', error));
+}
+
+    function abrirEditarCarro(id) {
+      fetch(`http://localhost:4242/api/carros/${id}`)
+        .then(response => response.json())
+        .then(carro => {
+          document.getElementById('mIdEdit').value = carro.id;
+          document.getElementById('mMarcaEdit').value = carro.marca;
+          document.getElementById('mDetalhesEdit').value = carro.detalhes;
+          document.getElementById('mFotoEdit').value = carro.imagem;
+
+          var editModal = new bootstrap.Modal(document.getElementById('editModal'));
+          editModal.show();
+        })
+        .catch(error => console.error('Erro ao carregar carro:', error));
+    }
+
+    function salvarEdicaoCarro() {
+      const id = document.getElementById('mIdEdit').value;
+      const marca = document.getElementById('mMarcaEdit').value;
+      const detalhes = document.getElementById('mDetalhesEdit').value;
+      const foto = document.getElementById('mFotoEdit').value;
+
+      const carro = { id, marca, detalhes, imagem: foto };
+
+      fetch(`http://localhost:4242/api/carros/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(carro)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        var editModal = new bootstrap.Modal(document.getElementById('editModal'));
+        editModal.hide();
+        location.reload();
+      })
+      .catch(error => console.error('Erro ao editar carro:', error));
+    }
+
+    function apagarCarro(id) {
+      fetch(`http://localhost:4242/api/carros/delete/${id}`, {
+        method: 'DELETE'
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        location.reload();
+      })
+      .catch(error => console.error('Erro ao apagar carro:', error));
+    }
+
+    function goBack() {
+      window.history.back();
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      const novoCarroBtn = document.querySelector('[data-bs-target="#addModal"]');
+      novoCarroBtn.addEventListener('click', () => {
+        // Reset the modal fields
+        document.getElementById('mId').value = '';
+        document.getElementById('mMarca').value = '';
+        document.getElementById('mFoto').value = '';
+      });
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
+

@@ -1,0 +1,29 @@
+nav {
+    background-color:#737373;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    height: 100px; 
+}
+.zona {
+    background-color:#737373;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    height: 100px; 
+}
+.button3{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-align: left;
+    float: left;
+    padding: 10px 20px;
+    font-size: 12px;
+    background-color: white; 
+    color: black; 
+    border: black;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
