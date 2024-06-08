@@ -4,7 +4,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const router = require('./routes/index');
+const router = require('./routes/local/index');
+const pgsRouter = require('./routes/pgs');
 const publicoRouter = require('./routes/publico');
 const privadoRouter = require('./routes/privado');  
 const app = express();
@@ -17,6 +18,7 @@ app.use(express.static(path.join(__dirname, 'frontEnd')));
 app.use('/', publicoRouter);
 app.use('/api', router);
 app.use('/privado', privadoRouter);
+app.use('/pgs', pgsRouter);
 
 // Porta do servidor
 const port = process.env.SERVER_PORT || 4242;
