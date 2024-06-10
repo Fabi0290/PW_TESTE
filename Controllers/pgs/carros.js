@@ -41,4 +41,62 @@ exports.getById = async (req, res) => {
       res.status(404).json({ msg: error.message })
   }
 }
+//criar um carro
+exports.create = async (req, res) => {
+  //apanhar os dados enviados
+  const { Marca, Detalhes, Foto } = req.body;
+  try {
+      //criar um novo carro
+      const carro = await prisma.Carros.create({
+          data: {
+              Marca: Marca,
+              Detalhes: Detalhes,
+              Foto: Foto
+          },
+      })
+      //devolve o carro criado
+      res.status(201).json(carro)
+  } catch (error) {
+      res.status(400).json({ msg: error.message })
+  }
+}
+//Atualizar um carro
+exports.update = async (req, res) => {
+  const { id, Marca, Detalhes, Foto } = req.body;
+
+  try {
+      //procurar o carro com id e atualizar os dados
+      const carro = await prisma.Carros.update({
+          where: {
+              id: id*1,
+          },
+          data: {
+              Marca: Marca,
+              Detalhes: Detalhes,
+              Foto: Foto
+          },
+      })
+      //devolve o carro atualizado
+      res.status(200).json(carro)
+  } catch (error) {
+      res.status(400).json({ msg: error.message })
+  }
+}
+//apagar o carro com id passado
+exports.delete = async (req, res) => {
+  //le o id do carro
+  const id = req.params.id;
+  try {
+      //delete student
+      await prisma.Carros.delete({
+          where: {
+              id: id*1,
+          },
+      })
+      //just return ok
+      res.status(200).send("ok");
+  } catch (error) {
+      res.status(400).json({ msg: error.message })
+  }
+}
 

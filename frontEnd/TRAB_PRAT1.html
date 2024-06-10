@@ -261,42 +261,52 @@ input {
  <!--Modal-->
  <div id="ModalSign" class="modal">
   <div class="modal-content">
-    <span class="close" onclick="fecharSign()"> &times;</span>
-    <div class="center">
-      <h2> Sign-Up</h2>
-        <label>Nome</label>
-        <input type="text">
-        <p></p>
-        <label>Email</label>
-        <input type="email">
-        <p></p>
-        <label> Password</label>
-        <input type="password">
-        <p></p>
-        <label> Re-type Password</label>
-        <input type="password">
-        <p></p>
-        <input type="checkbox" name="" id="">
-        I agree with the terms of Privacy and Politics
-        <p></p>
-        <button class="button2"> Sign-Up</button>
-    </div>
-  </div>
+    <h1 class="center">Sign-UP</h1>
+    <span class="close" onclick="fecharSign()">&times; </span>
+    <form  method="post" action="">
+      <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" class="form-control" id="nome" placeholder="Escreve o Nome" name="nome" required/>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" placeholder="Escreve o email" name="email" required/>
+      </div>
+      <div class="form-group">
+        <label for="pswd">Password:</label>
+        <input type="password" class="form-control" id="pswd" placeholder="Escreve a confirmação da password" name="pswd" required/>
+      </div>
+      <div class="form-group">
+        <label for="coPwd">Confirmar a Password:</label>
+        <input type="Password" class="form-control" id="coPwd" placeholder="Escreve a confirmação da password" name="coPwd" required/>
+      </div>
+    </form>
+          <button class="button2"><a onclick="validaPassword()">Sign-UP</a></button>
+      </div>
 
+  </div>
  </div>
 
  <div id="ModalLogin" class="modal">
   <div class="modal-content">
+    <h1 class="center">Login</h1>
     <span class="close" onclick="fecharLogin()">&times; </span>
-      <div class="center">
-          <h2>Login</h2>
-          <label> Email</label>
-          <input type="email" id="emailInput">
-          <p></p>
-          <label>Password</label>
-          <input type="password">
-          <p></p>
-          <button class="button2"><a onclick="login()">Login</a></button>
+    <form  method="post" action="">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" placeholder="Escreve o email" name="email" required/>
+      </div>
+      <div class="form-group">
+        <label for="pswd">Password:</label>
+        <input type="password" class="form-control" id="pswd" placeholder="Escreve a confirmação da password" name="pswd" required/>
+      </div>
+      <div class="form-group">
+        <label for="coPwd">Confirmar a Password:</label>
+        <input type="Password" class="form-control" id="coPwd" placeholder="Escreve a confirmação da password" name="coPwd" required/>
+      </div>
+      <button type="button" class="btn btn-primary">Registar</button>
+    </form>
+          <button class="button2"><a onclick="validaPassword()">Login</a></button>
       </div>
 
   </div>
@@ -322,13 +332,10 @@ input {
       var modal = document.getElementById("ModalLogin");
         modal.style.display = "none";
     }
-    function login(){
-      window.location.href="LOGIN_PAGINA.html"
-    }
 
   //funcao para carregar dados pelo json
   function carregarCarros(){
-    fetch('http://localhost:4242/api/carros/')//carrega os carros
+    fetch('http://localhost:4242/api/pgs/carros/')//carrega os carros
       .then(resposta => resposta.json())//converte a reposta para json
       .then(data => {
         //para cada carro
@@ -363,6 +370,60 @@ input {
 
 //Carrega os dados dos carros quando a pagina carrega
 window.onload = carregarCarros;
+
+//password
+function validaPassword(){
+        //teste
+        
+        var password1 = document.getElementById("pswd").value;
+        var password2 = document.getElementById("coPwd").value;
+
+        // Validate through RegularExpression
+        var passwordcheck1 =/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+
+        if (!passwordcheck1.test(password1)){
+           alert("Password inválida");
+        return false;
+        }
+        if(!password1.match(password2)){
+            alert("A password e a confirmação não são iguais");
+        return false;
+        }
+        novoUser();
+        return true;
+        
+       }
+
+       const novoUser = async () => {
+        var dados = {
+          email: document.getElementById("email").value,
+          name: document.getElementById("nome").value,
+          password: document.getElementById("pswd").value,
+          isAdmin: false,
+        };
+        console.log(dados);
+        fetch("http://localhost:4242/api/pgs/auth/signup", {
+          method: "POST",
+          headers: {"Content-Type": "application/json",},
+          body: JSON.stringify(dados),
+        })
+          .then((response) => {
+            // Verifica se a resposta foi bem sucedida
+            if (!response.ok) {
+              throw new Error("Erro ao obter os dados");
+            }
+            // Converte a resposta para JSON
+            return response.json();
+          })
+          .then((data) => {
+            // Faz algo com os dados
+            alert("O " + dados.name + " foi adicionado com sucesso!");
+          })
+          .catch((error) => {
+            // Captura qualquer erro de rede ou tratamento de erro
+            alert("Houve um erro:", error);
+          });
+      };
 
 
 

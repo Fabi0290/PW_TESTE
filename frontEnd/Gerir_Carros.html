@@ -129,7 +129,7 @@
   </div>
 
   <script>
-    fetch('http://localhost:4242/api/carros')
+    fetch('http://localhost:4242/api/pgs/carros')
         .then(response => response.json())
         .then(data => {
           const tabela = document.getElementById('carrosTabela');
@@ -172,7 +172,7 @@
         imagem: foto
       };
 
-      fetch('http://localhost:4242/api/carros/create', {
+      fetch('http://localhost:4242/api/pgs/carros/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -190,7 +190,7 @@
     }
 
     function abrirEditarCarro(id) {
-  fetch(`http://localhost:4242/api/carros/${id}`)
+  fetch(`http://localhost:4242/api/pgs/carros/${id}`)
     .then(response => {
       if (!response.ok) {
         throw new Error(`Erro na resposta da API: ${response.statusText}`);
@@ -230,7 +230,7 @@
 
       const carro = { id, marca, modelo, combustivel, quilometragem, preco, imagem: foto };
 
-      fetch(`http://localhost:4242/api/carros/update/${id}`, {
+      fetch(`http://localhost:4242/api/pgs/carros/update/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -248,7 +248,7 @@
     }
 
     function apagarCarro(id) {
-      fetch(`http://localhost:4242/api/carros/delete/${id}`, {
+      fetch(`http://localhost:4242/api/pgs/carros/delete/${id}`, {
         method: 'DELETE'
       })
       .then(response => response.json())

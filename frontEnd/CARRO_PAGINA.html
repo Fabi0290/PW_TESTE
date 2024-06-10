@@ -46,7 +46,7 @@
         const marca = params.get('marca');
 
         // Carrega os detalhes do carro usando o parâmetro da marca
-        fetch('http://localhost:4242/api/carros/')
+        fetch('http://localhost:4242/api/pgs/carros/')
           .then(response => response.json())
           .then(data => {
             const carro = data.find(c => c.marca === marca);
