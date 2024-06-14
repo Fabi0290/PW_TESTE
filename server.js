@@ -10,6 +10,8 @@ const pgsRouter = require('./routes/pgs');
 const publicoRouter = require('./routes/publico');
 const privadoRouter = require('./routes/privado');  
 const authRouter = require('./routes/pgs/auth');
+
+
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());

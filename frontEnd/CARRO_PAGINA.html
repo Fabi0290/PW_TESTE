@@ -13,6 +13,7 @@
     <img src="Photos/LOGO_STAND.png" alt="IMG1" height="100px" length="100px" >
   </nav>
 
+  
   <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -38,21 +39,23 @@
 
 
   <script>
+    
+    
     // Função para carregar os detalhes do carro
     function carregarDetalhesCarro() {
       // Verifica se há parâmetros na URL
       const params = new URLSearchParams(window.location.search);
-      if (params.has('marca')) {
-        const marca = params.get('marca');
+      if (params.has('id')) {
+        const id = params.get('id');
 
         // Carrega os detalhes do carro usando o parâmetro da marca
         fetch('http://localhost:4242/api/pgs/carros/')
           .then(response => response.json())
           .then(data => {
-            const carro = data.find(c => c.marca === marca);
+            const carro = data.find(c => c.id === id);
             if (carro) {
               // Insere a imagem do carro
-              document.getElementById('imagemCarro').innerHTML = `<img src="${carro.imagem}" alt="${carro.marca}" class="responsive-img"card-img-top" height="100% width="10%" ">`;
+              document.getElementById('imagemCarro').innerHTML = `<img src="${carro.imagem}" alt="${carro.id}" class="responsive-img"card-img-top" height="100% width="10%" ">`;
 
               //nome e modelo do carro
               document.getElementById('Nome').innerHTML= `

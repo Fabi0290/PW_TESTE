@@ -30,7 +30,13 @@
             window.location.href="GERIR_PERFIL.html"
         }
         function gerir_carros(){
-            window.location.href="GERIR_CARROS.html"
+            fetch('http://localhost:4242/api/pgs/carros/')
+            if(isAdmin==true){
+                window.location.href="GERIR_CARROS.html"
+            }else{
+                alert("necessita de permissoes");
+            }
+            
         }
     </script><br>
 

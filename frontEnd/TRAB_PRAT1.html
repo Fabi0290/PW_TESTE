@@ -233,6 +233,26 @@ input {
 #carroDetalhes {
   height: 111%; /* Defina a altura desejada aqui */
 }
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  overflow: auto;
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  border-radius: 10px;
+  max-width: 500px;
+}
 </style>
 <head>
   <meta charset="utf-8">
@@ -245,7 +265,7 @@ input {
   <nav> 
     <img src="Photos\LOGO_STAND.png" alt="IMG1" height="100px" width="20%">
     
-        <button class="button1" onclick=SignUp()> Sign-UP</button>
+        <button class="button1" onclick="SignUp()"> Sign-UP</button>
         <button class="button1" onclick="Login()"> Login </button>
     
   </nav>
@@ -258,7 +278,7 @@ input {
   </div>
  </div>
 
- <!--Modal-->
+ <!--Modal SIgn-->
  <div id="ModalSign" class="modal">
   <div class="modal-content">
     <h1 class="center">Sign-UP</h1>
@@ -266,19 +286,21 @@ input {
     <form  method="post" action="">
       <div class="form-group">
         <label for="nome">Nome:</label>
-        <input type="text" class="form-control" id="nome" placeholder="Escreve o Nome" name="nome" required/>
+        <input type="text" class="form-control" id="nome" placeholder="Nome" name="nome" required/>
       </div>
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" placeholder="Escreve o email" name="email" required/>
+        <input type="email" class="form-control" id="email" placeholder="Email" name="email" required/>
       </div>
       <div class="form-group">
         <label for="pswd">Password:</label>
-        <input type="password" class="form-control" id="pswd" placeholder="Escreve a confirmação da password" name="pswd" required/>
+        <input type="password" class="form-control" id="pswd" placeholder="Password" name="pswd" required/>
+        <label>Ver Password </label><input type="checkbox" onclick="togglePasswordVisibility('pswd')">
       </div>
       <div class="form-group">
         <label for="coPwd">Confirmar a Password:</label>
-        <input type="Password" class="form-control" id="coPwd" placeholder="Escreve a confirmação da password" name="coPwd" required/>
+        <input type="Password" class="form-control" id="coPwd" placeholder="Confirmação da Password" name="coPwd" required/>
+        <label>Ver Password </label><input type="checkbox" onclick="togglePasswordVisibility('coPwd')">
       </div>
     </form>
           <button class="button2"><a onclick="validaPassword()">Sign-UP</a></button>
@@ -294,19 +316,15 @@ input {
     <form  method="post" action="">
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" placeholder="Escreve o email" name="email" required/>
+        <input type="email" class="form-control" id="2email" placeholder="Escreve o email" name="email" required/>
       </div>
       <div class="form-group">
         <label for="pswd">Password:</label>
-        <input type="password" class="form-control" id="pswd" placeholder="Escreve a confirmação da password" name="pswd" required/>
+        <input type="password" class="form-control" id="2pswd" placeholder="Escreve a confirmação da password" name="2pswd" required/>
+        <label>Ver Password </label><input type="checkbox" onclick="togglePasswordVisibility('2pswd')">
       </div>
-      <div class="form-group">
-        <label for="coPwd">Confirmar a Password:</label>
-        <input type="Password" class="form-control" id="coPwd" placeholder="Escreve a confirmação da password" name="coPwd" required/>
-      </div>
-      <button type="button" class="btn btn-primary">Registar</button>
     </form>
-          <button class="button2"><a onclick="validaPassword()">Login</a></button>
+          <button class="button2"><a onclick="validaLogin()">Login</a></button>
       </div>
 
   </div>
@@ -333,6 +351,15 @@ input {
         modal.style.display = "none";
     }
 
+    function togglePasswordVisibility(id) {
+    var passwordField = document.getElementById(id);
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+    } else {
+      passwordField.type = "password";
+    }
+  }
+  
   //funcao para carregar dados pelo json
   function carregarCarros(){
     fetch('http://localhost:4242/api/pgs/carros/')//carrega os carros
@@ -345,7 +372,7 @@ input {
           cardDiv.classList.add('col-md-3');
           //Cria o codigo HTML com os cards
           cardDiv.innerHTML = `
-            <div class="card" onclick="paginaCarro('${carro.marca}')">
+            <div class="card" onclick="paginaCarro('${carro.id}')">
                 <div class="img-container">
                   <img class="card-img-top" src="${carro.imagem}" alt="${carro.marca}">
                 </div>
@@ -364,17 +391,15 @@ input {
 
 
   //funcao para abrir uma nova pagina com cada carro
-  function paginaCarro(marca){
-    window.location.href = `CARRO_PAGINA.html?marca=${marca}`;
+  function paginaCarro(id){
+    window.location.href = `CARRO_PAGINA.html?id=${id}`;
 }
 
 //Carrega os dados dos carros quando a pagina carrega
 window.onload = carregarCarros;
 
 //password
-function validaPassword(){
-        //teste
-        
+    function validaPassword(){      
         var password1 = document.getElementById("pswd").value;
         var password2 = document.getElementById("coPwd").value;
 
@@ -382,19 +407,49 @@ function validaPassword(){
         var passwordcheck1 =/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
 
         if (!passwordcheck1.test(password1)){
-           alert("Password inválida");
+          alert("A senha deve ter entre 8 e 15 caracteres, incluindo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial.");
         return false;
         }
         if(!password1.match(password2)){
             alert("A password e a confirmação não são iguais");
         return false;
         }
+        window.location.href='LOGIN_PAGINA.html';
         novoUser();
         return true;
         
        }
 
-       const novoUser = async () => {
+
+  const validaLogin = async () => {
+      var dados = {
+        email: document.getElementById("2email").value,
+        password: document.getElementById("2pswd").value,
+      };
+      const response= await fetch("http://localhost:4242/api/pgs/auth/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dados),
+      })
+      console.log(response.ok);
+      dados= await  response.json()
+      if(!response.ok){
+        alert("Erro ao fazer login");
+      }
+      else{
+        alert("Login efetuado com sucesso");
+        console.log(dados);
+        // Guardar o token no local storage
+        localStorage.setItem("token", dados.token);
+        window.location.href = 'LOGIN_PAGINA.html';
+      }
+  };
+
+
+
+    const novoUser = async () => {
         var dados = {
           email: document.getElementById("email").value,
           name: document.getElementById("nome").value,
@@ -424,9 +479,6 @@ function validaPassword(){
             alert("Houve um erro:", error);
           });
       };
-
-
-
   
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
