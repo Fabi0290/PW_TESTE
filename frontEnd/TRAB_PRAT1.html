@@ -2,143 +2,166 @@
 <html lang="en">
 
 <style>
-h1{
+
+.imagem_INI{
+  border: 2px solid black;
+  border-radius: 0;
+} 
+h1 {
   text-align: left;
-  
+  font-family: 'Arial', sans-serif;
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 20px;
 }
-img{
-  float: center;
+
+img {
+  display: block;
   margin: 0 auto;
   border-radius: 10px;
   
 }
 
+.button1, .button2, .button3, .button4, .button5 {
+  padding: 12px 24px;
+  font-size: 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  border: 1px solid transparent;
+}
 
-.button1{
-  text-align: right;
+.button1 {
   float: right;
-  padding: 10px 20px;
-  font-size: 12px;
-  background-color: white; 
-  color: black; 
-  border: black;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  background-color: black; 
+  color: white;
+  border: 2px solid #888;
 }
-.button2{
-  text-align: center;
-  float: center;
-  padding: 10px 20px;
-  font-size: 12px;
-  background-color: #888; 
-  color: black; 
-  border: black;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 
+.button2 {
+  float: none;
+  background-color: #888; 
+  color: black;
+  text-align: center;
+  border: 2px solid #888;
 }
-.button3{
+
+.button3 {
   position: absolute;
   top: 20px;
   left: 20px;
-  text-align: left;
-  float: left;
-  padding: 10px 20px;
-  font-size: 12px;
   background-color: white; 
-  color: black; 
-  border: black;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  color: black;
+  border: 2px solid #888;
 }
+
 .button4 {
-  display: block; /* Certifica-se de que cada botão ocupa toda a largura do container */
-  width: 100%; /* Ocupa toda a largura do container */
-  height: 60px; /* Define a altura do botão */
-  margin-bottom: 20px; /* Margem inferior para espaçamento entre os botões */
-  margin-left: 180px;
+  display: block;
+  width: 80%;
+  height: 60px;
+  margin-bottom: 20px;
+  margin-left: 10%;
   background-color: #888; 
-  color: black; 
-  border: black;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  color: black;
+  border: 2px solid #888;
 }
+
 .button5 {
-  margin-bottom: 20px; /* Margem inferior para espaçamento entre os botões */
-  background-color:cornflowerblue; 
-  color: white; 
-  border: white;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+  background-color: cornflowerblue; 
+  color: white;
+  border: 2px solid white;
+}
+
+.button1:hover, .button2:hover, .button3:hover, .button4:hover, .button5:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
 }
 
 nav {
-  background-color:#737373;
+  background-color: #737373;
   display: flex;
   justify-content: space-between; 
   align-items: center; 
   height: 100px; 
+  padding: 0 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 .img-container {
   height: 300px; 
   background-color: white; 
-}
-.card {
-  height: 350px; 
-}
-.modal {
-  display: none; /* Oculta o modal por padrão */
-  position: fixed; /* Permanece fixo na tela, mesmo quando rolar */
-  z-index: 1; /* Define a ordem de empilhamento do modal */
-  left: 0;
-  top: 0;
-  width: 100%; /* Largura total */
-  height: 100%; /* Altura total */
-  background-color: rgba(0,0,0,0.4); /* Fundo semi-transparente */
-  overflow: auto; /* Permite rolar o conteúdo do modal, se necessário */
+
 }
 
-/* Conteúdo do modal */
-.modal-content {
+.card {
+  height: 350px; 
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.modal, .meu-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  overflow: auto;
+}
+
+.modal-content, .meu-modal-content {
   background-color: #fefefe;
-  margin: 15% auto; /* Centraliza verticalmente */
+  margin: 5% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 30%; /* Largura do conteúdo do modal */
+  width: 50%;
+  max-width: 500px;
   border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+.modal-content:hover, .meu-modal-content:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px);
+}
+
 .close {
   text-align: right;
   color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
+  cursor: pointer;
 }
-.center{
+
+.center {
   text-align: center;
-  float: center;
 }
 
 .imagemCarros {
-  float: left; /* Alinha a imagem à esquerda */
-  width: 50%; /* Define a largura como metade da largura da página */
-  max-width: 50%; /* Garante que a imagem não ultrapasse metade da largura da página */
-  margin-right: 20px; /* Espaçamento à direita para separar da outra parte do conteúdo */
+  float: left;
+  width: 50%;
+  max-width: 50%;
+  margin-right: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .zona {
-  background-color:#737373;
+  background-color: #737373;
   display: flex;
   justify-content: space-between;
-  align-items: center; 
-  height: 100px; 
+  align-items: center;
+  height: 100px;
+  padding: 0 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilos para a imagem central */
 .imagem-central {
   position: absolute;
   top: 45px;
@@ -146,54 +169,60 @@ nav {
   transform: translate(-50%, -50%);
 }
 
-/* Estilos para os botões */
-
-
 .frase {
-  font-size: 36px; 
+  font-size: 36px;
   margin-left: 150px;
+  color: #333;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .botoes {
   position: absolute;
-  width: 200px; /* Define a largura do container */
-  margin-top: 20px; /* Margem superior para os botões */
-}
-
-
-
-.meu-modal {
-  display: none; /* Oculta o modal por padrão */
-  position: fixed; /* Permanece fixo na tela, mesmo quando rolar */
-  z-index: 1; /* Define a ordem de empilhamento do modal */
-  top: 250px;
-  right: 100px;
-  width: 50%; /* Largura total */
-  height: 50%; /* Altura total */
-  background-color: rgba(0,0,0,0.4); /* Fundo semi-transparente */
-  overflow: auto; /* Permite rolar o conteúdo do modal, se necessário */
-}
-
-.meu-modal-content {
-  position: absolute;
-  top: 0%; /* Posiciona o conteúdo no centro vertical */
-  left: 4%; /* Posiciona o conteúdo no centro horizontal */
-  padding: 10px;
-  border-radius: 10px;
+  width: 200px;
+  margin-top: 20px;
 }
 
 .logo {
   position: absolute;
-  bottom: 30%; /* Posiciona a imagem no canto inferior */
-  left: 7%; /* Posiciona a imagem no canto esquerdo */
-  width: 350px; /* Largura da imagem */
+  bottom: 30%;
+  left: 7%;
+  width: 350px;
   height: 250px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .dados {
-  font-size: 24px; 
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 24px;
   margin-left: 600px;
   margin-top: 100px;
+}
+
+.dados label {
+  margin-bottom: 5px;
+  width: 100px;
+}
+
+.dados input {
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+  width: 100%;
+}
+
+.responsive-img {
+  max-width: 100%;
+  height: auto;
+}
+
+#carroDetalhes {
+  height: 111%;
 }
 
 input {
@@ -204,54 +233,14 @@ input {
   box-sizing: border-box;
   font-size: 16px;
 }
-.dados {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+
+input:focus {
+  border-color: #888;
+  box-shadow: 0 0 8px rgba(136, 136, 136, 0.4);
 }
 
-.dados label {
-  margin-bottom: 5px;
-  width: 100px; /* ajuste este valor conforme necessário */
-}
-
-.dados input {
-  padding: 5px;
-  margin-bottom: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  width: 100%; /* para preencher a largura disponível */
-  height: 50%;
-  font-size: 14px;
-}
-.responsive-img {
-  max-width: 100%;
-  height: auto;
-}
-
-#carroDetalhes {
-  height: 111%; /* Defina a altura desejada aqui */
-}
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.4);
-  overflow: auto;
-}
-.modal-content {
-  background-color: #fefefe;
-  margin: 5% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 50%;
-  border-radius: 10px;
-  max-width: 500px;
+.bod{
+  background-color:#ccc;
 }
 </style>
 <head>
@@ -261,14 +250,15 @@ input {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" >
   
 </head>
-<body>
+<body class="bod">
   <nav> 
-    <img src="Photos\LOGO_STAND.png" alt="IMG1" height="100px" width="20%">
+    <img src="Photos\LOGO_STAND.png" alt="IMG1" height="90px" width="20%">
     
         <button class="button1" onclick="SignUp()"> Sign-UP</button>
         <button class="button1" onclick="Login()"> Login </button>
     
   </nav>
+  <img class="imagem_INI" src="Photos\INICIO.png" alt="aa" height="10%" width="100%">
 
 <h1>Destaques</h1>
 
@@ -373,10 +363,10 @@ input {
           //Cria o codigo HTML com os cards
           cardDiv.innerHTML = `
             <div class="card" onclick="paginaCarro('${carro.id}')">
-                <div class="img-container">
+                
                   <img class="card-img-top" src="${carro.imagem}" alt="${carro.marca}">
-                </div>
                 <div class="card-body mt-3">
+                  <p></p>
                   <h4 class="card-title">${carro.marca}</h4>
                   <p class="card-text">${carro.modelo ? carro.modelo : ''}</p>
                   <p class="card-text">${carro.quilometragem ? carro.quilometragem : ''} | ${carro.preco ? carro.preco : ''}</p>
@@ -422,7 +412,7 @@ window.onload = carregarCarros;
 
 
   const validaLogin = async () => {
-      var dados = {
+    var dados = {
         email: document.getElementById("2email").value,
         password: document.getElementById("2pswd").value,
       };
@@ -479,6 +469,8 @@ window.onload = carregarCarros;
             alert("Houve um erro:", error);
           });
       };
+
+
   
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

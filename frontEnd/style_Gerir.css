@@ -1,29 +1,240 @@
-nav {
-    background-color:#737373;
+
+.imagem_INI{
+    border: 2px solid black;
+    border-radius: 0;
+  } 
+  h1 {
+    text-align: left;
+    font-family: 'Arial', sans-serif;
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+    
+  }
+  
+  .button1, .button2, .button3, .button4, .button5 {
+    padding: 12px 24px;
+    font-size: 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    border: 1px solid transparent;
+  }
+  
+  .button1 {
+    float: right;
+    background-color: black; 
+    color: white;
+    border: 2px solid #888;
+  }
+  
+  .button2 {
+    float: none;
+    background-color: #888; 
+    color: black;
+    text-align: center;
+    border: 2px solid #888;
+  }
+  
+  .button3 {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: white; 
+    color: black;
+    border: 2px solid #888;
+  }
+  
+  .button4 {
+    display: block;
+    width: 80%;
+    height: 60px;
+    margin-bottom: 20px;
+    margin-left: 10%;
+    background-color: #888; 
+    color: black;
+    border: 2px solid #888;
+  }
+  
+  .button5 {
+    margin-bottom: 20px;
+    background-color: cornflowerblue; 
+    color: white;
+    border: 2px solid white;
+  }
+  
+  .button1:hover, .button2:hover, .button3:hover, .button4:hover, .button5:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+  }
+  
+  nav {
+    background-color: #737373;
     display: flex;
     justify-content: space-between; 
     align-items: center; 
     height: 100px; 
-}
-.zona {
-    background-color:#737373;
+    padding: 0 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .img-container {
+    height: 300px; 
+    background-color: white; 
+  
+  }
+  
+  .card {
+    height: 350px; 
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+  }
+  
+  .modal, .meu-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    overflow: auto;
+  }
+  
+  .modal-content, .meu-modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .modal-content:hover, .meu-modal-content:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+  }
+  
+  .close {
+    text-align: right;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .center {
+    text-align: center;
+  }
+  
+  .imagemCarros {
+    float: left;
+    width: 50%;
+    max-width: 50%;
+    margin-right: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .zona {
+    background-color: #737373;
     display: flex;
     justify-content: space-between;
-    align-items: center; 
-    height: 100px; 
-}
-.button3{
+    align-items: center;
+    height: 100px;
+    padding: 0 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .imagem-central {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    text-align: left;
-    float: left;
-    padding: 10px 20px;
-    font-size: 12px;
-    background-color: white; 
-    color: black; 
-    border: black;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+    top: 45px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .frase {
+    font-size: 36px;
+    margin-left: 150px;
+    color: #333;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+  
+  .botoes {
+    position: absolute;
+    width: 200px;
+    margin-top: 20px;
+  }
+  
+  .logo {
+    position: absolute;
+    bottom: 30%;
+    left: 7%;
+    width: 350px;
+    height: 250px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .dados {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 24px;
+    margin-left: 600px;
+    margin-top: 100px;
+  }
+  
+  .dados label {
+    margin-bottom: 5px;
+    width: 100px;
+  }
+  
+  .dados input {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  .responsive-img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  #carroDetalhes {
+    height: 111%;
+  }
+  
+  input {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  input:focus {
+    border-color: #888;
+    box-shadow: 0 0 8px rgba(136, 136, 136, 0.4);
+  }
+  
+  .bod{
+    background-color:#ccc;
+  }

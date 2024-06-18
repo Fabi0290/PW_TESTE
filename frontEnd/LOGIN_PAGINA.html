@@ -21,26 +21,7 @@
             <button onclick="gerir_carros()" class="button1"> Gerir Carros </button>
         </div>
     </nav>
-
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-        function gerir(){
-            window.location.href="GERIR_PERFIL.html"
-        }
-        function gerir_carros(){
-            fetch('http://localhost:4242/api/pgs/carros/')
-            if(isAdmin==true){
-                window.location.href="GERIR_CARROS.html"
-            }else{
-                alert("necessita de permissoes");
-            }
-            
-        }
-    </script><br>
-
-    <p class="frase" >Bem-vindo </p>
+    <p><h1 id="frase"></h1> </p>
 
     <div class="botoes">
         <button class="button4" onclick="openMeuModal('Estatísticas')"> Estatísticas </button>
@@ -53,7 +34,65 @@
         <div class="meu-modal-content" id="modalConteudo"></div>
     
     </div>
+
+
     <script>
+      
+        function goBack() {
+            window.history.back();
+        }
+        function gerir(){
+            window.location.href="GERIR_PERFIL.html"
+        }
+
+    const gerir_carros = async () => {
+          var dados = {
+            token: localStorage.getItem("token"),
+          };
+          console.log(JSON.stringify(dados));
+          const response= await fetch("http://localhost:4242/api/pgs/auth/letoken", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dados),
+          })
+          console.log(response);
+          dados= await  response.json()
+          console.log(dados);
+          if(!dados.isAdmin){
+            alert("Não tem acesso a esta pagina");
+          }
+          else{
+            window.location.href='Gerir_Carros.html';
+            alert(`Bem-vindo, ${dados.name}`);
+          }
+      };
+
+      const Frases = async () => {
+          var dados = {
+            token: localStorage.getItem("token"),
+          };
+          console.log(JSON.stringify(dados));
+          const response = await fetch("http://localhost:4242/api/pgs/auth/letoken", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dados),
+          });
+          console.log(response);
+          dados = await response.json();
+          console.log(dados);
+          const fraseElement = document.getElementById('frase');
+          if (fraseElement) {
+            fraseElement.innerText = `Bem-vindo, ${dados.name}`;
+          } else {
+            console.error("Element with ID 'frase' not found in the DOM.");
+          }
+        };
+        window.onload = Frases;
+
         // Função para abrir o novo modal com o conteúdo específico
         function openMeuModal(content) {
             var modal = document.getElementById("meuModal");
