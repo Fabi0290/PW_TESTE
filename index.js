@@ -3,8 +3,8 @@ const app = express();
 const port = process.env.PORT || 4242;
 
 app.get('/', (req, res) => {
- res.send('Hello World!');
-});
+    res.sendFile(__dirname + '/frontend/TRAB_PRAT1.html');
+  });
 
 app.listen(port, () => {
  console.log(`App listening at http://localhost:${port}`);
