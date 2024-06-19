@@ -190,32 +190,32 @@
     }
 
     function abrirEditarCarro(id) {
-  fetch(`http://localhost:4242/api/pgs/carros/${id}`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Erro na resposta da API: ${response.statusText}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      if (!data || data.length === 0) {
-        console.error('Nenhum dado de carro encontrado');
-        return;
-      }
-      const carro = data[0]; // Extraindo o primeiro objeto do array
-      document.getElementById('mIdEdit').value = carro.id;
-      document.getElementById('mMarcaEdit').value = carro.marca;
-      document.getElementById('mModeloEdit').value = carro.modelo;
-      document.getElementById('mCombustivelEdit').value = carro.combustivel;
-      document.getElementById('mQuilometragemEdit').value = carro.quilometragem;
-      document.getElementById('mPrecoEdit').value = carro.preco;
-      document.getElementById('mFotoEdit').value = carro.imagem;
+        fetch(`http://localhost:4242/api/pgs/carros/${id}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`Erro na resposta da API: ${response.statusText}`);
+            }
+            return response.json();
+          })
+          .then(data => {
+            if (!data || data.length === 0) {
+              console.error('Nenhum dado de carro encontrado');
+              return;
+            }
+            const carro = data[0]; // Extraindo o primeiro objeto do array
+            document.getElementById('mIdEdit').value = carro.id;
+            document.getElementById('mMarcaEdit').value = carro.marca;
+            document.getElementById('mModeloEdit').value = carro.modelo;
+            document.getElementById('mCombustivelEdit').value = carro.combustivel;
+            document.getElementById('mQuilometragemEdit').value = carro.quilometragem;
+            document.getElementById('mPrecoEdit').value = carro.preco;
+            document.getElementById('mFotoEdit').value = carro.imagem;
 
-      var editModal = new bootstrap.Modal(document.getElementById('editModal'));
-      editModal.show();
-    })
-    .catch(error => console.error('Erro ao carregar carro:', error));
-}
+            var editModal = new bootstrap.Modal(document.getElementById('editModal'));
+            editModal.show();
+          })
+          .catch(error => console.error('Erro ao carregar carro:', error));
+      }
 
 
     function salvarEdicaoCarro() {

@@ -11,15 +11,14 @@
 
     <nav>
         <img src="Photos/LOGO_STAND.png" alt="IMG1" height="100px" width="20%">
-        <div class="zona">
-            
+        
             <!-- Botão no canto superior esquerdo -->
             <button class="button3" onclick="goBack()">Back</button>
                 
             <!-- Botão no canto superior direito -->
             <button onclick="gerir()" class="button1">Gerir perfil</button>
             <button onclick="gerir_carros()" class="button1"> Gerir Carros </button>
-        </div>
+        
     </nav>
     <p><h1 id="frase"></h1> </p>
 
@@ -85,13 +84,39 @@
           dados = await response.json();
           console.log(dados);
           const fraseElement = document.getElementById('frase');
-          if (fraseElement) {
-            fraseElement.innerText = `Bem-vindo, ${dados.name}`;
-          } else {
-            console.error("Element with ID 'frase' not found in the DOM.");
-          }
+          fraseElement.innerText = `Bem-vindo, ${dados.name}`;
+         
         };
         window.onload = Frases;
+
+        //
+        const Estatisticas = async () => {
+              var dados = {
+                token: localStorage.getItem("token"),
+              };
+              console.log(JSON.stringify(dados));
+              const response = await fetch("http://localhost:4242/api/pgs/auth/letoken", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(dados),
+              });
+              console.log(response);
+              dados = await response.json();
+              console.log(dados);
+              const modalContent = document.getElementById('modalConteudo');
+              modalContent.innerHTML = `
+                <h2>Estatísticas</h2>
+                <p>Nome: ${dados.name}</p>
+                <p>Administrador: ${dados.isAdmin? 'Sim' : 'Não'}</p>
+                <p>Email: ${dados.email}</p>
+                <p>Compras: ${dados.compras}</p>
+              `;
+            };
+
+
+
 
         // Função para abrir o novo modal com o conteúdo específico
         function openMeuModal(content) {
@@ -103,7 +128,7 @@
         switch(content) {
             case 'Estatísticas':
                 titulo = "As minhas estatísticas";
-                modalContent.innerHTML = "";
+                modalContent.innerHTML = Estatisticas();
                 break;
             case 'Anuncios':
                 titulo = "Os meus anúncios";
